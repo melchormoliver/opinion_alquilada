@@ -1,0 +1,7 @@
+{
+  "name": "opinion_alquilada",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
