@@ -12,7 +12,7 @@ import {
 
 import './HelloWorld.css';
 
-const Tab1: React.FC = () => {
+const HelloWorld: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -33,4 +33,4 @@ const Tab1: React.FC = () => {
   );
 };
 
-export default Tab1;
+export default HelloWorld;
