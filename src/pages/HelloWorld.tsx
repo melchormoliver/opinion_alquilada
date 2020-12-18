@@ -17,14 +17,14 @@ const HelloWorld: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Hello World2</IonTitle>
+          <IonTitle>Hello World3</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonGrid>
           <IonRow>
             <IonCol>
-              <IonTitle size='large'>Hello World2</IonTitle>
+              <IonTitle size='large'>Hello World3</IonTitle>
             </IonCol>
           </IonRow>
         </IonGrid>
