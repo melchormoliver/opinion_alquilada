@@ -10,7 +10,7 @@ import {
   IonToolbar,
 } from '@ionic/react';
 
-import './HelloWorld.css';
+import styles from './HelloWorld.module.scss';
 
 const HelloWorld: React.FC = () => {
   return (
@@ -24,7 +24,9 @@ const HelloWorld: React.FC = () => {
         <IonGrid>
           <IonRow>
             <IonCol>
-              <IonTitle size='large'>Hello World2</IonTitle>
+              <IonTitle size='large' className={styles.colorRojo}>
+                Hello World
+              </IonTitle>
             </IonCol>
           </IonRow>
         </IonGrid>
