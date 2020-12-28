@@ -17,7 +17,7 @@ const HelloWorld: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Hello World2</IonTitle>
+          <IonTitle>Hello World3</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
