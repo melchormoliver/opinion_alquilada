@@ -28,11 +28,8 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path='/hello-world' component={HelloWorld} exact={true} />
-        <Route
-          path='/'
-          render={() => <Redirect to='/hello-world' />}
-          exact={true}
-        />
+        <Redirect exact from='/' to='/hello-world' />
+        <Redirect to='/404' />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
