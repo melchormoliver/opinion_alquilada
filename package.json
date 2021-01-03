@@ -31,7 +31,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:coverage": "react-scripts test -- --coverage --watchAll --forceExit --detectOpenHandles --config=jest.config.js",
+    "test:coverage": "react-scripts test -- --coverage --watchAll=false --forceExit --detectOpenHandles --config=jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
