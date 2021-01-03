@@ -13,7 +13,6 @@ jobs:
         node-version: [10]
 
     steps:
-      - uses: actions/checkout@v2
       - name: Add Running Label
         # https://github.com/actions/github-script#apply-a-label-to-an-issue
         uses: actions/github-script@v2
@@ -48,6 +47,7 @@ jobs:
               labels: ['COV: ${{steps.coverage-percent.outputs.coverage}}']
             })
       - name: Generate Build
+        uses: actions/checkout@v2
         run: npm ci && npm run build
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
