@@ -5,6 +5,6 @@ import HelloWorld from './HelloWorld';
 
 test('HelloWorld - renders without crashing', async () => {
   const { findByText } = render(<HelloWorld />);
-  const result = await findByText('Hello World2');
+  const result = await findByText('Hello World3');
   expect(result).toBeDefined();
 });
