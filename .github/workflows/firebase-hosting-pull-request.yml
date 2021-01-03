@@ -46,8 +46,8 @@ jobs:
               repo: context.repo.repo,
               labels: ['COV: ${{steps.coverage-percent.outputs.coverage}}']
             })
+      - uses: actions/checkout@v2
       - name: Generate Build
-        uses: actions/checkout@v2
         run: npm ci && npm run build
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
