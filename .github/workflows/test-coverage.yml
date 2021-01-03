@@ -32,7 +32,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Test and Generate Coverage
-        run: npm run test:coverage
+        run: npm i && npm run test:coverage
 
       - name: Print the Total Coverage
         id: coverage-percent
