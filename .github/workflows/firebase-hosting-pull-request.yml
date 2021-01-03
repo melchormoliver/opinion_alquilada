@@ -6,51 +6,10 @@ name: Deploy to Firebase Hosting on PR
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: true
-      matrix:
-        node-version: [10]
-
     steps:
-      - name: Add Running Label
-        # https://github.com/actions/github-script#apply-a-label-to-an-issue
-        uses: actions/github-script@v2
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.issues.setLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: [':arrows_counterclockwise:']
-            })
-      - name: Generate Coverage Report
-        run: npm run test:coverage
-      - name: Print the Total Coverage
-        id: coverage-percent
-        shell: bash
-        run: |
-          value=`sed -n 47p coverage/lcov-report/index.html | awk -F '>' '{print $2}' | awk -F '%' '{print $1}'`
-          echo "::set-output name=coverage::$value"
-          echo $value
-      # https://github.com/actions/github-script#apply-a-label-to-an-issue
-      - name: Add Coverage Label
-        uses: actions/github-script@v2
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.issues.setLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ['COV: ${{steps.coverage-percent.outputs.coverage}}']
-            })
-      - name: Middle Step
-        uses: actions/checkout@v2
-      - name: Generate Build
-        run: npm ci && npm run build
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: actions/checkout@v2
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_OPINION_ALQUILADA }}'
