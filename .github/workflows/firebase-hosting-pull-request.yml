@@ -13,6 +13,7 @@ jobs:
         node-version: [10]
 
     steps:
+      - uses: actions/checkout@v2
       - name: Add Running Label
         # https://github.com/actions/github-script#apply-a-label-to-an-issue
         uses: actions/github-script@v2
@@ -26,7 +27,6 @@ jobs:
               labels: [':arrows_counterclockwise:']
             })
       - name: Generate Coverage Report
-        uses: actions/checkout@v2
         run: npm run test:coverage
       - name: Print the Total Coverage
         id: coverage-percent
