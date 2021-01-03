@@ -25,8 +25,8 @@ jobs:
               repo: context.repo.repo,
               labels: [':arrows_counterclockwise:']
             })
-      - uses: actions/checkout@v2
       - name: Generate Coverage Report
+        uses: actions/checkout@v2
         run: npm run test:coverage
       - name: Print the Total Coverage
         id: coverage-percent
