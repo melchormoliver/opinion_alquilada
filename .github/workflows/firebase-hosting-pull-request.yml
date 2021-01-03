@@ -46,7 +46,8 @@ jobs:
               repo: context.repo.repo,
               labels: ['COV: ${{steps.coverage-percent.outputs.coverage}}']
             })
-      - uses: actions/checkout@v2
+      - name: Middle Step
+        uses: actions/checkout@v2
       - name: Generate Build
         run: npm ci && npm run build
         uses: FirebaseExtended/action-hosting-deploy@v0
