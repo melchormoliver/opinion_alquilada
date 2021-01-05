@@ -62,8 +62,5 @@
     "identity-obj-proxy": "^3.0.0",
     "jest-enzyme": "^7.1.2"
   },
-  "description": "An Ionic project",
-  "setupFiles": [
-    "<rootDir>/src/setupTests.js"
-  ]
+  "description": "An Ionic project"
 }

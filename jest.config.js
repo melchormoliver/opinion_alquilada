@@ -1,6 +1,6 @@
 module.exports = {
   rootDir: `${__dirname}`,
-  verbose: true,
+  verbose: false,
   collectCoverage: true,
   moduleNameMapper: {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
@@ -22,4 +22,5 @@ module.exports = {
     },
   },
   moduleDirectories: ['node_modules', 'src'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 };
