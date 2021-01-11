@@ -2,14 +2,12 @@
 
 - ionic capacitor add android
 
-# To update Android files
+# To generate version update Android files
 
-- ionic capacitor copy android
+- ionic capacitor build android
+- for a signed version go to build -> generate signed bundle apk -> use the certificates under the folder "certificates" to sign it
+- go to android\app\release to get the .apk file
 
-# To open Android Studio
-
-- npx cap open android
-
-# live reload
+# live reload to debugging
 
 - ionic capacitor run android -l --host=YOUR_IP_ADDRESS
