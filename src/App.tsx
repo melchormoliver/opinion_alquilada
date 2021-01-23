@@ -1,5 +1,5 @@
-import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import HelloWorld from './pages/HelloWorld';
@@ -22,14 +22,19 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import FeedPage from './features/feed/pages/FeedPage';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route path='/hello-world' component={HelloWorld} exact={true} />
-        <Redirect exact from='/' to='/hello-world' />
-        <Redirect to='/404' />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route path='/feed' exact render={() => <FeedPage />} />
+            <Route path='/hello' exact render={() => <HelloWorld />} />
+            <Redirect from='*' exact to='/hello' />
+          </Switch>
+        </Suspense>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

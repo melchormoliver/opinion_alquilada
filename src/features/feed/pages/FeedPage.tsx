@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   IonCol,
   IonContent,
@@ -10,26 +9,26 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import styles from './HelloWorld.module.scss';
+interface FeedProps {}
 
-const HelloWorld: React.FC = () => {
+const FeedPage: React.FC<FeedProps> = ({}) => {
+  const { t } = useTranslation();
+  const pepe = t('feed title');
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Hello World3</IonTitle>
+          <IonTitle>{t('feed title') ? t('feed title') : 'CULI'}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonGrid fixed>
+        <IonGrid>
           <IonRow>
             <IonCol>
-              <IonItem
-                className={[styles.colorRojo, '--ion-padding'].join(' ')}
-              >
-                Hello World
-              </IonItem>
+              <IonItem>CULI</IonItem>
             </IonCol>
           </IonRow>
         </IonGrid>
@@ -38,4 +37,4 @@ const HelloWorld: React.FC = () => {
   );
 };
 
-export default HelloWorld;
+export default FeedPage;
