@@ -1,37 +1,40 @@
 import {
-  IonCol,
+  IonButtons,
   IonContent,
-  IonGrid,
   IonHeader,
+  IonIcon,
   IonItem,
   IonPage,
-  IonRow,
-  IonTitle,
+  IonSearchbar,
   IonToolbar,
 } from '@ionic/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { filterOutline } from 'ionicons/icons';
 
-interface FeedProps {}
-
-const FeedPage: React.FC<FeedProps> = ({}) => {
+const FeedPage: React.FC = () => {
   const { t } = useTranslation();
-  const pepe = t('feed title');
+  const [searchText, setSearchText] = useState('');
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>{t('feed title') ? t('feed title') : 'CULI'}</IonTitle>
+          <IonButtons slot='end'>
+            <IonIcon
+              size='small'
+              className='ion-margin ion-justify-content-center'
+              icon={filterOutline}
+            />
+          </IonButtons>
+          <IonSearchbar
+            placeholder={t('feed.searchbar.placeholder')}
+            value={searchText}
+            onIonChange={(e) => setSearchText(e.detail.value!)}
+          />
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonItem>CULI</IonItem>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+        <IonItem>FEED PAGE</IonItem>
       </IonContent>
     </IonPage>
   );

@@ -1,3 +1,7 @@
 {
-  "feed title": "Nuevas Entradas"
+  "feed title": "Nuevas Entradas",
+  "feed.searchbar.placeholder": "Buscar",
+  "app.first.tab.title": "Inicio",
+  "app.second.tab.title": "Crear",
+  "app.third.tab.title": "Perfil"
 }

@@ -1,3 +1,7 @@
 {
-  "feed title": "New Entries"
+  "feed title": "New Entries",
+  "feed.searchbar.placeholder": "Search",
+  "app.first.tab.title": "Home",
+  "app.second.tab.title": "New",
+  "app.third.tab.title": "Profile"
 }
