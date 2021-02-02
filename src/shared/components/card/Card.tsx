@@ -21,10 +21,10 @@ const Card: React.FC<CardProps> = ({ title, content, imgsrc }) => {
     <IonCard>
       <IonGrid>
         <IonRow>
-          <IonCol size='3'>
+          <IonCol size='4'>
             <IonImg className={styles.image} src={imgsrc} />
           </IonCol>
-          <IonCol size='9'>
+          <IonCol size='8'>
             <IonCardHeader>
               <IonCardTitle>{title}</IonCardTitle>
             </IonCardHeader>

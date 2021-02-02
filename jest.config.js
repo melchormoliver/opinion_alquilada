@@ -10,6 +10,7 @@ module.exports = {
     '!src/serviceWorker.ts',
     '!src/index.tsx',
     '!src/**/*.d.ts',
+    '!src/i18n.ts',
   ],
   coverageReporters: ['lcov', 'text'],
   coverageDirectory: 'coverage',

@@ -1,4 +1,3 @@
-import '../../setupTests';
 import React from 'react';
 import DetailPage from './DetailPage';
 import { shallow } from 'enzyme';

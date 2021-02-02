@@ -11,3 +11,6 @@ import 'jest-enzyme';
 configure({ adapter: new Adapter() });
 mockIonicReact();
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: (key: string) => key }),
+}));
