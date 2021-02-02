@@ -1,9 +1,6 @@
-interface Item {
-  src: string;
-  content: string;
-  title: string;
-}
-const items: Item[] = [
+import { FeedItem } from '../types/FeedItem';
+
+const items: FeedItem[] = [
   {
     src:
       'https://www.vivus.es/blog/wp-content/uploads/2019/04/hacerse-una-casa.jpeg',

@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { filterOutline } from 'ionicons/icons';
 
 import Card from '../../../shared/components/card/Card';
-import items from '../mocks/items';
+import FeedService from '../services/FeedService';
 
 const FeedPage: React.FC = () => {
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ const FeedPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {items.map((elem, index) => (
+        {FeedService.getFeed().map((elem, index) => (
           <Card
             key={index}
             imgsrc={elem.src}
