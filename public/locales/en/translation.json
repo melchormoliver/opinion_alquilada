@@ -1,7 +1,10 @@
 {
   "feed title": "New Entries",
   "feed.searchbar.placeholder": "Search",
-  "app.first.tab.title": "Home",
-  "app.second.tab.title": "New",
-  "app.third.tab.title": "Profile"
+  "tabs.first.tab.title": "Home",
+  "tabs.second.tab.title": "New",
+  "tabs.third.tab.title": "Profile",
+  "notfound.title": "Not found",
+  "notfound.content": "Resource not found!",
+  "notfound.redirect": "Go to Feed"
 }
