@@ -18,57 +18,28 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { Redirect, Route } from 'react-router-dom';
-import {
-  IonApp,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-} from '@ionic/react';
+import { Route } from 'react-router-dom';
+import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { addCircleOutline, homeOutline, personOutline } from 'ionicons/icons';
-import { useTranslation } from 'react-i18next';
 
 import HelloWorld from './pages/HelloWorld';
-import FeedPage from './features/feed/pages/FeedPage';
 import OpinionPage from './features/opinion/pages/OpinionPage';
-import ProfilePage from './features/profile/pages/ProfilePage';
-
 import routeOpinion from './features/opinion/router/routes';
-import routeFeed from './features/feed/router/routes';
-import routeProfile from './features/profile/router/routes';
+import NotFoundPage from './features/404/pages/NotFoundPage';
+import notFoundRoutes from './features/404/router/routes';
+import TabsManager from './features/tabs/components/TabsManager';
+import routeTabs from './features/tabs/router/routes';
 
 const App: React.FC = () => {
-  const { t } = useTranslation();
   return (
     <IonApp>
       <IonReactRouter>
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route path={routeFeed} exact component={FeedPage} />
-            <Route path={routeProfile} exact component={ProfilePage} />
-            <Route path={routeOpinion} exact component={OpinionPage} />
-            <Route path='/hello' exact component={HelloWorld} />
-            <Redirect to={routeFeed} />
-          </IonRouterOutlet>
-          <IonTabBar slot='bottom'>
-            <IonTabButton tab='home' href={routeFeed}>
-              <IonIcon icon={homeOutline} />
-              <IonLabel>{t('app.first.tab.title')}</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab='opinion' href={routeOpinion}>
-              <IonIcon icon={addCircleOutline} />
-              <IonLabel>{t('app.second.tab.title')}</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab='profile' href={routeProfile}>
-              <IonIcon icon={personOutline} />
-              <IonLabel>{t('app.third.tab.title')}</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        <IonRouterOutlet>
+          <Route path={notFoundRoutes} exact component={NotFoundPage} />
+          <Route path={routeOpinion} exact component={OpinionPage} />
+          <Route path='/hello' exact component={HelloWorld} />
+          <Route path={routeTabs} component={TabsManager} />
+        </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
   );
