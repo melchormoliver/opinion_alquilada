@@ -6,5 +6,7 @@
   "tabs.third.tab.title": "Perfil",
   "notfound.title": "No Encontrado",
   "notfound.content": "Recurso no encontrado!",
-  "notfound.redirect": "Ir al feed"
+  "notfound.redirect": "Ir al feed",
+  "opinion.title": "Nueva Opinion",
+  "harddataslide.title": "Datos Duros"
 }
