@@ -1,0 +1,10 @@
+{
+  "feed title": "Nuevas Entradas",
+  "feed.searchbar.placeholder": "Buscar",
+  "tabs.first.tab.title": "Inicio",
+  "tabs.second.tab.title": "Crear",
+  "tabs.third.tab.title": "Perfil",
+  "notfound.title": "No Encontrado",
+  "notfound.content": "Recurso no encontrado!",
+  "notfound.redirect": "Ir al feed"
+}

@@ -4,6 +4,7 @@ import {
   IonContent,
   IonGrid,
   IonHeader,
+  IonItem,
   IonPage,
   IonRow,
   IonTitle,
@@ -21,12 +22,14 @@ const HelloWorld: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonGrid>
+        <IonGrid fixed>
           <IonRow>
             <IonCol>
-              <IonTitle size='large' className={styles.colorRojo}>
+              <IonItem
+                className={[styles.colorRojo, '--ion-padding'].join(' ')}
+              >
                 Hello World
-              </IonTitle>
+              </IonItem>
             </IonCol>
           </IonRow>
         </IonGrid>
