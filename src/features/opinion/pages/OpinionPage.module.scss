@@ -1,11 +1,14 @@
-// .ion-slides {
-//   height: 80%;
-// }
-
 .root {
   --bullet-background: red;
   --bullet-background-active: green;
+
+  ion-slides {
+    height: 100%;
+    overflow-y: scroll;
+    display: block;
+  }
 }
+
 ion-slides {
   height: 100%;
 }

@@ -1,8 +1,6 @@
 import {
-  IonChip,
   IonCol,
   IonGrid,
-  IonIcon,
   IonInput,
   IonItem,
   IonLabel,
@@ -11,9 +9,11 @@ import {
   IonTitle,
   IonToggle,
 } from '@ionic/react';
-
+import { home } from 'ionicons/icons';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import DescribableRoom from '../DescribableRoom/DescribableRoom';
+
 import './HardDataSlide.module.scss';
 
 const HardDataSlide: React.FC = () => {
@@ -102,6 +102,16 @@ const HardDataSlide: React.FC = () => {
                 onIonChange={(e) => setIsHumedo(e.detail.checked)}
               />
             </IonItem>
+          </IonCol>
+        </IonRow>
+
+        <IonRow>
+          <IonCol>
+            <DescribableRoom
+              icon={home}
+              title='Ultimos Cartuchos'
+              items={['culi', 'ut', 'kawirpy']}
+            />
           </IonCol>
         </IonRow>
       </IonGrid>
