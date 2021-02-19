@@ -22,7 +22,6 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
-import HelloWorld from './pages/HelloWorld';
 import OpinionPage from './features/opinion/pages/OpinionPage';
 import routeOpinion from './features/opinion/router/routes';
 import NotFoundPage from './features/404/pages/NotFoundPage';
@@ -38,7 +37,6 @@ const App: React.FC = () => {
         <IonRouterOutlet>
           <Route path={notFoundRoutes} exact component={NotFoundPage} />
           <Route path={routeOpinion} exact component={OpinionPage} />
-          <Route path='/hello' exact component={HelloWorld} />
           <Route path={routeTabs} component={TabsManager} />
           <Redirect to={routeFeed} />
         </IonRouterOutlet>
