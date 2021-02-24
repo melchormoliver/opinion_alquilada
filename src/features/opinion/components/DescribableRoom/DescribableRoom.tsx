@@ -8,34 +8,39 @@ import {
   IonReorder,
   IonReorderGroup,
 } from '@ionic/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ItemReorderEventDetail } from '@ionic/core';
-import { addOutline, home } from 'ionicons/icons';
-
-interface DescribableRoom {
+import { addOutline, pencil } from 'ionicons/icons';
+import { useHistory } from 'react-router';
+interface DescribableRoomProps {
   title: string;
   items: string[];
   icon: string;
 }
 
-const DescribableRoom: React.FC<DescribableRoom> = ({ title, items, icon }) => {
-  const [myItems, setMyitems] = useState<JSX.Element[]>();
-
+const DescribableRoom: React.FC<DescribableRoomProps> = ({
+  title,
+  items,
+  icon,
+}) => {
+  const history = useHistory();
+  const [myItems] = useState<JSX.Element[]>(
+    items.map((item, index) => (
+      <IonItem
+        key={item}
+        onClick={() => {
+          history.push(`/opinion/room/${item}`);
+        }}
+      >
+        <IonLabel>{item}</IonLabel>
+        <IonIcon icon={pencil} slot='end' />
+        <IonReorder slot='end'></IonReorder>
+      </IonItem>
+    ))
+  );
   const doReorder = (event: CustomEvent<ItemReorderEventDetail>) => {
     event.detail.complete();
   };
-
-  useEffect(() => {
-    setMyitems(
-      items.map((item) => (
-        <IonReorder>
-          <IonItem>
-            <IonLabel>{item}</IonLabel>
-          </IonItem>
-        </IonReorder>
-      ))
-    );
-  }, []);
 
   return (
     <IonCard>

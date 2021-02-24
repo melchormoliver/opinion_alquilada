@@ -22,13 +22,14 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
-import OpinionPage from './features/opinion/pages/OpinionPage';
+import OpinionPage from './features/opinion/pages/Opinion/OpinionPage';
 import routeOpinion from './features/opinion/router/routes';
 import NotFoundPage from './features/404/pages/NotFoundPage';
 import notFoundRoutes from './features/404/router/routes';
 import TabsManager from './features/tabs/components/TabsManager';
 import routeTabs from './features/tabs/router/routes';
 import routeFeed from './features/feed/router/routes';
+import RoomPage from './features/opinion/pages/Room/RoomPage';
 
 const App: React.FC = () => {
   return (
@@ -37,6 +38,7 @@ const App: React.FC = () => {
         <IonRouterOutlet>
           <Route path={notFoundRoutes} exact component={NotFoundPage} />
           <Route path={routeOpinion} exact component={OpinionPage} />
+          <Route path={'/opinion/room/:idRoom'} exact component={RoomPage} />
           <Route path={routeTabs} component={TabsManager} />
           <Redirect to={routeFeed} />
         </IonRouterOutlet>

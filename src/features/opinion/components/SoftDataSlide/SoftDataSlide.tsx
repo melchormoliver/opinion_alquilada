@@ -1,9 +1,6 @@
 import {
-  IonChip,
   IonCol,
   IonGrid,
-  IonIcon,
-  IonInput,
   IonItem,
   IonLabel,
   IonList,
@@ -13,15 +10,12 @@ import {
   IonRow,
   IonSlide,
   IonTitle,
-  IonToggle,
 } from '@ionic/react';
-import React, { useEffect, useState } from 'react';
-import { closeCircle, heart, pin, close } from 'ionicons/icons';
+import React, { useState } from 'react';
 import SelectableChips from '../SelectableChips/SelectableChips';
 import OpinionService from '../../services/OpinionService';
 
 const SoftDataSlide: React.FC = () => {
-  const [luminoso, setLuminoso] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>('');
 
   return (
