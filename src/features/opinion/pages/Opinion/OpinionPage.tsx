@@ -11,7 +11,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import React from 'react';
+import React, { useRef } from 'react';
 import { closeOutline, saveOutline } from 'ionicons/icons';
 /*import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';*/
@@ -26,6 +26,7 @@ const slideOpts = {
 };
 
 const OpinionPage: React.FC = () => {
+  const slidesRef = useRef() as React.MutableRefObject<HTMLIonSlidesElement>;
   /*const { t } = useTranslation();
   const { register, handleSubmit } = useForm();
 
@@ -60,8 +61,13 @@ const OpinionPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonSlides className={styles.root} pager options={slideOpts}>
-          <HardDataSlide />
+        <IonSlides
+          className={styles.root}
+          pager
+          options={slideOpts}
+          ref={slidesRef}
+        >
+          <HardDataSlide slidesRef={slidesRef} />
           <SoftDataSlide />
         </IonSlides>
       </IonContent>

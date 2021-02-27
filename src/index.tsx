@@ -2,9 +2,12 @@ import firebase from 'firebase/app';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './i18n';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import * as serviceWorker from './serviceWorker';
 
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { rootReducer } from './store/root-reducer';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDTBOqaVUWAXvBlMxGEGC85QqZe3-2z21A',
@@ -16,9 +19,14 @@ const firebaseConfig = {
   measurementId: 'G-LQJ8VGZ060',
 };
 firebase.initializeApp(firebaseConfig);
+
+const store = createStore(rootReducer);
+
 ReactDOM.render(
   <Suspense fallback={<div>Loading... </div>}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </Suspense>,
   document.getElementById('root')
 );

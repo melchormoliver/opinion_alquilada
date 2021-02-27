@@ -10,13 +10,17 @@ import {
   IonToggle,
 } from '@ionic/react';
 import { home } from 'ionicons/icons';
-import React, { useState } from 'react';
+import React, { MutableRefObject, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import DescribableRoom from '../DescribableRoom/DescribableRoom';
+import { useSelector } from 'react-redux';
 
+import { RootState } from '../../../../store/root-reducer';
+import DescribableRoom from '../DescribableRoom/DescribableRoom';
 import './HardDataSlide.module.scss';
 
-const HardDataSlide: React.FC = () => {
+const HardDataSlide: React.FC<{
+  slidesRef: MutableRefObject<HTMLIonSlidesElement>;
+}> = ({ slidesRef }) => {
   const [provincia, setProvincia] = useState<string>('');
   const [localidad, setLocalidad] = useState<string>('');
   const [calle, setCalle] = useState<string>('');
@@ -24,6 +28,7 @@ const HardDataSlide: React.FC = () => {
   const [isLuminoso, setIsLuminoso] = useState<boolean>(false);
   const [isHumedo, setIsHumedo] = useState<boolean>(false);
   const { t } = useTranslation();
+  const rooms = useSelector((state: RootState) => state.opinion.rooms);
 
   return (
     <IonSlide>
@@ -108,9 +113,10 @@ const HardDataSlide: React.FC = () => {
         <IonRow>
           <IonCol>
             <DescribableRoom
+              slidesRef={slidesRef}
               icon={home}
-              title='Ultimos Cartuchos'
-              items={['culi', 'ut', 'kawirpy']}
+              title='Habitaciones'
+              items={rooms}
             />
           </IonCol>
         </IonRow>

@@ -3,7 +3,7 @@ import { FeedItem } from '../types/FeedItem';
 const items: FeedItem[] = [
   {
     src:
-      'https://www.vivus.es/blog/wp-content/uploads/2019/04/hacerse-una-casa.jpeg',
+      'https://http2.mlstatic.com/D_NQ_NP_734477-MLA44257875401_122020-O.webp',
     title: 'Gaboto 123',
     content: '2 ambientes, aceptan mascotas',
   },

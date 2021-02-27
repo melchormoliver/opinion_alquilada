@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 import { render } from '@testing-library/react';
 import HardDataSlide from './HardDataSlide';
 
 test('HardDataSlide - renders without crashing', async () => {
-  const { baseElement } = render(<HardDataSlide />);
+  const slidesRef = React.createRef() as MutableRefObject<HTMLIonSlidesElement>;
+  const { baseElement } = render(<HardDataSlide slidesRef={slidesRef} />);
   expect(baseElement).toBeDefined();
 });
