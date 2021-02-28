@@ -4,27 +4,32 @@ import {
   IonContent,
   IonGrid,
   IonHeader,
+  IonItem,
   IonPage,
   IonRow,
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
 
-import './HelloWorld.css';
+import styles from './HelloWorld.module.scss';
 
 const HelloWorld: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Hello World2</IonTitle>
+          <IonTitle>Hello World3</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonGrid>
+        <IonGrid fixed>
           <IonRow>
             <IonCol>
-              <IonTitle size='large'>Hello World2</IonTitle>
+              <IonItem
+                className={[styles.colorRojo, '--ion-padding'].join(' ')}
+              >
+                Hello World
+              </IonItem>
             </IonCol>
           </IonRow>
         </IonGrid>

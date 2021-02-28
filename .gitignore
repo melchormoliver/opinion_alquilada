@@ -25,3 +25,5 @@ yarn-error.log*
 
 # Cache de eslint
 .eslintcache
+
+/certificates
