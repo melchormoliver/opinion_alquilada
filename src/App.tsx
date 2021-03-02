@@ -22,20 +22,22 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
-import routeOpinion from './features/opinion/router/routes';
 import NotFoundPage from './features/404/pages/NotFoundPage';
 import notFoundRoutes from './features/404/router/routes';
 import TabsManager from './features/tabs/components/TabsManager';
 import routeTabs from './features/tabs/router/routes';
 import routeFeed from './features/feed/router/routes';
+import DetailPage from './features/detail/DetailPage';
+import FeedPage from './features/feed/pages/FeedPage';
 
 const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
+          <Route path="" exact component={FeedPage} />  
           <Route path={notFoundRoutes} exact component={NotFoundPage} />
-
+          <Route path="/DetailPage" exact component={DetailPage} />
           <Route path={routeTabs} component={TabsManager} />
           <Redirect to={routeFeed} />
         </IonRouterOutlet>

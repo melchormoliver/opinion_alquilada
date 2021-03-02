@@ -1,30 +1,40 @@
 import {
-    IonButtons,
+    IonPage,
     IonContent,
     IonList,
     IonItem,
     IonIcon,
+    IonToolbar,
+    IonBackButton,
+    IonHeader,
+    IonButtons,
+    IonButton
   } from '@ionic/react';
 import React from 'react';
+import {add} from 'ionicons/icons';
 
   const DetailPage: React.FC = () => {
       return (
-        <React.Fragment>
+        <IonPage>
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+               <IonBackButton defaultHref="/"/>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
         <IonContent>
         <IonList>
-        <div >
-          <IonItem >
-              <IonIcon name="add"></IonIcon>
-            &nbsp;
-           </IonItem>
-          <IonItem >
-  
+        <IonItem button >
+            <IonIcon icon={add}/>  
           </IonItem>
-        </div>
+          <IonItem button >
+            <IonIcon icon={add}/>  
+          </IonItem>
       </IonList>
 
         </IonContent>
-        </React.Fragment>
+        </IonPage>
         );
 };
 

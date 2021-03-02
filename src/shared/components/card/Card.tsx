@@ -18,7 +18,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ title, content, imgsrc }) => {
   return (
-    <IonCard>
+    <IonCard routerLink="/DetailPage">
       <IonGrid>
         <IonRow>
           <IonCol size='4'>
