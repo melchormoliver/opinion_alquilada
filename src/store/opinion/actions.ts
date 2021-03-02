@@ -1,9 +1,4 @@
-import {
-  ADD_ROOM,
-  DELETE_ROOM,
-  EDIT_ROOM,
-  RoomActionTypes,
-} from '../types/types';
+import { ADD_ROOM, DELETE_ROOM, EDIT_ROOM, RoomActionTypes } from './types';
 
 export const addRoom = (newMessage: string): RoomActionTypes => {
   return {

@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../../../../store/root-reducer';
-import DescribableRoom from '../DescribableRoom/DescribableRoom';
+import DescribableRoom from '../RoomList/RoomList';
 import './HardDataSlide.module.scss';
 
 const HardDataSlide: React.FC<{
@@ -94,17 +94,6 @@ const HardDataSlide: React.FC<{
               <IonToggle
                 checked={isLuminoso}
                 onIonChange={(e) => setIsLuminoso(e.detail.checked)}
-              />
-            </IonItem>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol>
-            <IonItem>
-              <IonLabel>Humedo</IonLabel>
-              <IonToggle
-                checked={isHumedo}
-                onIonChange={(e) => setIsHumedo(e.detail.checked)}
               />
             </IonItem>
           </IonCol>

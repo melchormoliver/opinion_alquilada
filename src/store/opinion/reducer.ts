@@ -4,10 +4,10 @@ import {
   ADD_ROOM,
   DELETE_ROOM,
   EDIT_ROOM,
-} from '../types/types';
+} from './types';
 
 const initialState: RoomState = {
-  rooms: ['pieza1', 'pieza2', 'pieza3'],
+  rooms: [],
 };
 
 const chatReducer = (
@@ -16,7 +16,6 @@ const chatReducer = (
 ): RoomState => {
   switch (action.type) {
     case ADD_ROOM: {
-      debugger;
       return {
         rooms: [...state.rooms, action.payload],
       };
