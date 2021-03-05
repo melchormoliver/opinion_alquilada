@@ -26,7 +26,6 @@ const HardDataSlide: React.FC<{
   const [calle, setCalle] = useState<string>('');
   const [monto, setMonto] = useState<number | undefined>(undefined);
   const [isLuminoso, setIsLuminoso] = useState<boolean>(false);
-  const [isHumedo, setIsHumedo] = useState<boolean>(false);
   const { t } = useTranslation();
   const rooms = useSelector((state: RootState) => state.opinion.rooms);
 

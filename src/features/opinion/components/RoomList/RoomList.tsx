@@ -16,8 +16,6 @@ import { ItemReorderEventDetail } from '@ionic/core';
 import { addOutline, pencil, trash } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 import { v4 } from 'uuid';
-import { addRoom, editRoom } from '../../../../store/opinion/actions';
-import { useDispatch } from 'react-redux';
 interface DescribableRoomProps {
   title: string;
   items?: string[];
@@ -32,7 +30,6 @@ const DescribableRoom: React.FC<DescribableRoomProps> = ({
   slidesRef,
 }) => {
   const history = useHistory();
-  const dispatch = useDispatch();
   const [myItems, setMyItems] = useState<string[]>(items);
   const doReorder = (event: CustomEvent<ItemReorderEventDetail>) => {
     event.detail.complete();
@@ -49,12 +46,10 @@ const DescribableRoom: React.FC<DescribableRoomProps> = ({
   const addOrEditItem = async (id?: string) => {
     if (id) {
       // edit
-      dispatch(editRoom(id));
-      //history.push(`/opinion/room/${id}`);
+      history.push(`/opinion/room/${id}`);
     } else {
       // new
       const key = v4();
-      //dispatch(addRoom(key.substr(0, 8)));
       history.push(`/opinion/room/${key}`);
     }
   };

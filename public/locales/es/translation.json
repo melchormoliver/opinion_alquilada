@@ -8,5 +8,22 @@
   "notfound.content": "Recurso no encontrado!",
   "notfound.redirect": "Ir al feed",
   "opinion.title": "Nueva Opinion",
-  "harddataslide.title": "Datos Duros"
+  "harddataslide.title": "Datos Duros",
+  "roompage.title": "Nueva Habitacion",
+  "roompage.room.input": "Habitacion",
+  "roompage.havehumidity.toggle": "¿ Tiene Humedad ?",
+  "roompage.havehumidity.title": "Lugar Humedad",
+  "roompage.havehumidity.roof.item": "Techo",
+  "roompage.havehumidity.wall.item": "Paredes",
+  "roompage.havehumidity.floor.item": "Piso",
+  "roompage.havewindow.toggle": "¿ Tiene Ventanas ?",
+  "roompage.havewindow.title": "Luz Natural",
+  "roompage.havewindow.from.datetime": "Desde",
+  "roompage.havewindow.to.datetime": "Hasta",
+  "roompage.havewindow.puffyOnRain.toggle": "¿ Se hinchan cuando llueve ?",
+  "roompage.listenNeighbors.toogle": "¿Se escucha a tu vecinos?",
+  "roompage.extraopinion.textarea": "Opiniones Extra",
+  "roompage.extraopinion.placeholder.textarea.1": "Hay un tubo atravezando el techo...",
+  "roompage.extraopinion.placeholder.textarea.2": "Hay un gato que nos visita a la tarde...",
+  "roompage.extraopinion.placeholder.textarea.3": "Tiene desembocadura de internet..."
 }

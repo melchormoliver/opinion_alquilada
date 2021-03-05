@@ -11,14 +11,11 @@ import {
   IonIcon,
   IonInput,
   IonItem,
-  IonItemDivider,
   IonLabel,
   IonList,
-  IonListHeader,
   IonPage,
-  IonRadio,
-  IonRadioGroup,
   IonRow,
+  IonTextarea,
   IonTitle,
   IonToggle,
   IonToolbar,
@@ -26,7 +23,9 @@ import {
 import { closeOutline, saveOutline } from 'ionicons/icons';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import styles from './RoomPage.module.scss';
 
 interface Params {
   idRoom: string;
@@ -40,11 +39,14 @@ const RoomPage: React.FC = () => {
   const [puffyWindowOnRain, setPuffyWindowOnRain] = useState(false);
   const [fromLight, setFromLight] = useState('09:00');
   const [toLight, setToLight] = useState('10:00');
-  const [selected1, setSelected1] = useState(false);
-  const [selected2, setSelected2] = useState(false);
-  const [selected3, setSelected3] = useState(false);
-  const submitRef = useRef<HTMLIonButtonElement>(null);
+  const [roofHumidity, setRoofHumidity] = useState(false);
+  const [wallHumidity, setWallHumidity] = useState(false);
+  const [floorHumidity, setFloorHumidity] = useState(false);
+  const [listenNeighbors, setListenNeighbors] = useState(false);
+  const [extraOpinion, setExtraOpinion] = useState('');
 
+  const submitRef = useRef<HTMLIonButtonElement>(null);
+  const { t } = useTranslation();
   const onSubmit = (data: any) => {
     console.log(data);
   };
@@ -55,18 +57,20 @@ const RoomPage: React.FC = () => {
         <IonToolbar>
           <IonButtons slot='start'>
             <IonBackButton defaultHref='/tabs/feed' />
-            <IonTitle> Nueva Habitacion </IonTitle>
+            <IonTitle> {t('roompage.title')} </IonTitle>
           </IonButtons>
-
           <IonButtons slot='end'>
-            <IonButton onClick={() => submitRef.current!.click()}>
+            <IonButton
+              id='id-saveOpinion'
+              onClick={() => submitRef.current!.click()}
+            >
               <IonIcon
                 size='small'
                 className='ion-margin ion-justify-content-center'
                 icon={saveOutline}
               />
             </IonButton>
-            <IonButton>
+            <IonButton id='id-closeWindow'>
               <IonIcon
                 size='small'
                 className='ion-margin ion-justify-content-center'
@@ -83,11 +87,13 @@ const RoomPage: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position='floating'>Habitacion</IonLabel>
+                  <IonLabel position='floating'>
+                    {t('roompage.room.input')}
+                  </IonLabel>
                   <IonInput
                     placeholder='Pieza, Living...'
-                    name='idTitle'
-                    id='idTitle'
+                    name='roomname'
+                    id='id-roomname'
                     type='text'
                     ref={register}
                   ></IonInput>
@@ -97,10 +103,13 @@ const RoomPage: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel>¿ Tiene Humedad ?</IonLabel>
+                  <IonLabel>{t('roompage.havehumidity.toggle')}</IonLabel>
                   <IonToggle
-                    id='id-isHumid'
+                    slot='end'
                     checked={isHumid}
+                    id='id-haveHumidity'
+                    name='haveHumidity'
+                    value={String(isHumid)}
                     onIonChange={(e) => setIsHumid(e.detail.checked)}
                   />
                 </IonItem>
@@ -110,39 +119,46 @@ const RoomPage: React.FC = () => {
               <IonRow>
                 <IonCol className='ion-text-center'>
                   <IonList>
-                    <IonListHeader>
-                      <IonLabel>Lugar Humedad</IonLabel>
-                    </IonListHeader>
-                    <IonRadioGroup
-                      allowEmptySelection
-                      value={selected1}
-                      onIonChange={(e) => setSelected1(e.detail.value)}
-                    >
-                      <IonItem>
-                        <IonLabel>Techo</IonLabel>
-                        <IonRadio name='humidity' slot='start' value='biff' />
-                      </IonItem>
-                    </IonRadioGroup>
-                    <IonRadioGroup
-                      allowEmptySelection
-                      value={selected2}
-                      onIonChange={(e) => setSelected2(e.detail.value)}
-                    >
-                      <IonItem>
-                        <IonLabel>Paredes</IonLabel>
-                        <IonRadio name='humidity' slot='start' value='griff' />
-                      </IonItem>
-                    </IonRadioGroup>
-                    <IonRadioGroup
-                      allowEmptySelection
-                      value={selected3}
-                      onIonChange={(e) => setSelected3(e.detail.value)}
-                    >
-                      <IonItem>
-                        <IonLabel>Piso</IonLabel>
-                        <IonRadio name='humidity' slot='start' value='buford' />
-                      </IonItem>
-                    </IonRadioGroup>
+                    <IonTitle>{t('roompage.havehumidity.title')}</IonTitle>
+                    <IonItem>
+                      <IonLabel>
+                        {t('roompage.havehumidity.roof.item')}
+                      </IonLabel>
+                      <IonToggle
+                        slot='start'
+                        checked={roofHumidity}
+                        id='id-roofHumidity'
+                        name='roofHumidity'
+                        value={String(roofHumidity)}
+                        onIonChange={(e) => setRoofHumidity(e.detail.checked)}
+                      />
+                    </IonItem>
+                    <IonItem>
+                      <IonLabel>
+                        {t('roompage.havehumidity.wall.item')}
+                      </IonLabel>
+                      <IonToggle
+                        slot='start'
+                        checked={wallHumidity}
+                        id='id-wallHumidity'
+                        name='wallHumidity'
+                        value={String(wallHumidity)}
+                        onIonChange={(e) => setWallHumidity(e.detail.checked)}
+                      />
+                    </IonItem>
+                    <IonItem>
+                      <IonLabel>
+                        {t('roompage.havehumidity.floor.item')}
+                      </IonLabel>
+                      <IonToggle
+                        slot='start'
+                        checked={floorHumidity}
+                        id='id-floorHumidity'
+                        name='floorHumidity'
+                        value={String(floorHumidity)}
+                        onIonChange={(e) => setFloorHumidity(e.detail.checked)}
+                      />
+                    </IonItem>
                   </IonList>
                 </IonCol>
               </IonRow>
@@ -150,9 +166,11 @@ const RoomPage: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel>¿ Tiene Ventanas ?</IonLabel>
+                  <IonLabel>{t('roompage.havewindow.toggle')}</IonLabel>
                   <IonToggle
-                    id='id-isHumid'
+                    slot='end'
+                    id='id-haveWindow'
+                    name='haveWindow'
                     checked={haveWindow}
                     onIonChange={(e) => setHaveWindow(e.detail.checked)}
                   />
@@ -163,15 +181,19 @@ const RoomPage: React.FC = () => {
               <>
                 <IonRow>
                   <IonCol className='ion-text-center'>
-                    <IonLabel>Luz Natural</IonLabel>
+                    <IonTitle>{t('roompage.havewindow.title')}</IonTitle>
                   </IonCol>
                 </IonRow>
                 <IonRow className='ion-justify-content-between'>
                   <IonCol>
                     <IonItem className='ion-text-center'>
-                      <IonLabel position='stacked'>Desde</IonLabel>
+                      <IonLabel position='stacked'>
+                        {t('roompage.havewindow.from.datetime')}
+                      </IonLabel>
                       <IonDatetime
                         displayFormat='HH:mm'
+                        id='id-fromLight'
+                        name='fromLight'
                         value={fromLight}
                         onIonChange={(e) => setFromLight(e.detail.value!)}
                       />
@@ -179,8 +201,12 @@ const RoomPage: React.FC = () => {
                   </IonCol>
                   <IonCol>
                     <IonItem className='ion-text-center'>
-                      <IonLabel position='floating'>Hasta</IonLabel>
+                      <IonLabel position='floating'>
+                        {t('roompage.havewindow.to.datetime')}
+                      </IonLabel>
                       <IonDatetime
+                        name='toLight'
+                        id='id-toLight'
                         displayFormat='HH:mm'
                         value={toLight}
                         onIonChange={(e) => setToLight(e.detail.value!)}
@@ -191,9 +217,12 @@ const RoomPage: React.FC = () => {
                 <IonRow>
                   <IonCol>
                     <IonItem>
-                      <IonLabel>¿ Se hinchan cuando llueve ?</IonLabel>
+                      <IonLabel>
+                        {t('roompage.havewindow.puffyOnRain.toggle')}
+                      </IonLabel>
                       <IonToggle
                         id='id-puffyWindow'
+                        name='puffyWindowOnRain'
                         checked={puffyWindowOnRain}
                         onIonChange={(e) =>
                           setPuffyWindowOnRain(e.detail.checked)
@@ -204,20 +233,52 @@ const RoomPage: React.FC = () => {
                 </IonRow>
               </>
             )}
+            <IonRow>
+              <IonCol>
+                <IonItem>
+                  <IonLabel>{t('roompage.listenNeighbors.toogle')}</IonLabel>
+                  <IonToggle
+                    slot='end'
+                    checked={listenNeighbors}
+                    name='listenNeighbors'
+                    id='id-listenNeighbors'
+                    value={String(listenNeighbors)}
+                    onIonChange={(e) => setListenNeighbors(e.detail.checked)}
+                  />
+                </IonItem>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>
+                <IonLabel>{t('roompage.extraopinion.textarea')}</IonLabel>
+                <IonTextarea
+                  //color='primary'
+                  autoGrow
+                  id='id-extraOpinion'
+                  name='extraOpinion'
+                  inputMode='text'
+                  value={extraOpinion}
+                  className={styles.extraOpinion}
+                  maxlength={500}
+                  placeholder={t(
+                    'roompage.extraopinion.placeholder.textarea.1'
+                  )}
+                  onIonChange={(e) => setExtraOpinion(e.detail.value!)}
+                ></IonTextarea>
+              </IonCol>
+            </IonRow>
           </IonGrid>
         </form>
       </IonContent>
       <IonFooter>
-        <IonToolbar>
-          <IonButton
-            ref={submitRef}
-            onClick={handleSubmit(onSubmit)}
-            expand='block'
-            type='submit'
-          >
-            LISTO
-          </IonButton>
-        </IonToolbar>
+        <IonButton
+          ref={submitRef}
+          onClick={handleSubmit(onSubmit)}
+          expand='block'
+          type='submit'
+        >
+          LISTO
+        </IonButton>
       </IonFooter>
     </IonPage>
   );
