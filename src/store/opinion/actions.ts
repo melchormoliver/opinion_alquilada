@@ -1,6 +1,12 @@
-import { ADD_ROOM, DELETE_ROOM, EDIT_ROOM, RoomActionTypes } from './types';
+import {
+  ADD_ROOM,
+  DELETE_ROOM,
+  EDIT_ROOM,
+  Room,
+  RoomActionTypes,
+} from './types';
 
-export const addRoom = (newMessage: string): RoomActionTypes => {
+export const addRoom = (newMessage: Room): RoomActionTypes => {
   return {
     type: ADD_ROOM,
     payload: newMessage,

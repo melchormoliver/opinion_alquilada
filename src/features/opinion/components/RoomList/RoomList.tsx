@@ -16,21 +16,22 @@ import { ItemReorderEventDetail } from '@ionic/core';
 import { addOutline, pencil, trash } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 import { v4 } from 'uuid';
-interface DescribableRoomProps {
+import { Room } from '../../../../store/opinion/types';
+interface RoomListProps {
   title: string;
-  items?: string[];
+  items?: Room[];
   icon: string;
   slidesRef: MutableRefObject<HTMLIonSlidesElement>;
 }
 
-const DescribableRoom: React.FC<DescribableRoomProps> = ({
+const RoomList: React.FC<RoomListProps> = ({
   title,
   items = [],
   icon,
   slidesRef,
 }) => {
   const history = useHistory();
-  const [myItems, setMyItems] = useState<string[]>(items);
+  const [myItems, setMyItems] = useState<Room[]>(items);
   const doReorder = (event: CustomEvent<ItemReorderEventDetail>) => {
     event.detail.complete();
   };
@@ -40,7 +41,7 @@ const DescribableRoom: React.FC<DescribableRoomProps> = ({
   }, [items]);
 
   const deleteItem = async (id: string) => {
-    setMyItems([...myItems.filter((elem) => elem !== id)]);
+    setMyItems([...myItems.filter((elem) => elem.id !== id)]);
   };
 
   const addOrEditItem = async (id?: string) => {
@@ -53,7 +54,7 @@ const DescribableRoom: React.FC<DescribableRoomProps> = ({
       history.push(`/opinion/room/${key}`);
     }
   };
-
+  console.log('RoomList - PINTANDO', items);
   return (
     <IonCard>
       <IonItem>
@@ -66,9 +67,9 @@ const DescribableRoom: React.FC<DescribableRoomProps> = ({
 
       <IonCardContent>
         <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
-          {myItems.map((item) => (
+          {myItems.map((item: Room) => (
             <IonItemSliding
-              key={item}
+              key={v4()}
               onIonDrag={() => {
                 slidesRef.current.lockSwipes(true);
                 setTimeout(() => {
@@ -77,26 +78,32 @@ const DescribableRoom: React.FC<DescribableRoomProps> = ({
               }}
             >
               <IonItemOptions side='start'>
-                <IonItemOption onClick={() => deleteItem(item)} color='danger'>
+                <IonItemOption
+                  onClick={() => deleteItem(item.id)}
+                  color='danger'
+                >
                   <IonIcon slot='icon-only' icon={trash} />
                 </IonItemOption>
               </IonItemOptions>
               <IonItem
-                key={item}
+                key={v4()}
                 onClick={() => {
                   history.push(`/opinion/room/${item}`);
                 }}
               >
-                <IonLabel>{item}</IonLabel>
+                <IonLabel>{item.title}</IonLabel>
                 <IonIcon
                   icon={pencil}
                   slot='end'
-                  onClick={() => addOrEditItem(item)}
+                  onClick={() => addOrEditItem(item.id)}
                 />
                 <IonReorder slot='end'></IonReorder>
               </IonItem>
               <IonItemOptions side='end'>
-                <IonItemOption onClick={() => deleteItem(item)} color='danger'>
+                <IonItemOption
+                  onClick={() => deleteItem(item.id)}
+                  color='danger'
+                >
                   <IonIcon slot='icon-only' icon={trash} />
                 </IonItemOption>
               </IonItemOptions>
@@ -108,4 +115,4 @@ const DescribableRoom: React.FC<DescribableRoomProps> = ({
   );
 };
 
-export default DescribableRoom;
+export default RoomList;

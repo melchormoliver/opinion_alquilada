@@ -4,6 +4,7 @@ import {
   ADD_ROOM,
   DELETE_ROOM,
   EDIT_ROOM,
+  Room,
 } from './types';
 
 const initialState: RoomState = {
@@ -22,7 +23,9 @@ const chatReducer = (
     }
     case DELETE_ROOM:
       return {
-        rooms: state.rooms.filter((room) => room !== action.payload),
+        rooms: [
+          ...state.rooms.filter((room: Room) => room.id !== action.payload),
+        ],
       };
     case EDIT_ROOM:
       return { rooms: state.rooms };

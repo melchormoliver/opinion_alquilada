@@ -1,4 +1,6 @@
 .extraOpinion {
-  --background: var(--ion-color-primary);
-  border-radius: 2vw;
+  --border-radius: 5vw;
+  border-radius: 5vw;
+  box-shadow: 0 0 0 0.5vw var(--ion-color-secondary);
+  border: 0.5vw solid transparent;
 }

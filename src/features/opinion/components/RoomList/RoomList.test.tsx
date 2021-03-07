@@ -1,11 +1,11 @@
 import React, { MutableRefObject, useRef } from 'react';
 import { render } from '@testing-library/react';
-import DescribableRoom from './RoomList';
+import RoomList from './RoomList';
 
-test('DescribableRoom - renders without crashing', async () => {
+test('RoomList - renders without crashing', async () => {
   const slidesRef = React.createRef() as MutableRefObject<HTMLIonSlidesElement>;
   const { baseElement } = render(
-    <DescribableRoom
+    <RoomList
       title='test'
       icon='asd'
       slidesRef={slidesRef}

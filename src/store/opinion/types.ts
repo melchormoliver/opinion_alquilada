@@ -1,5 +1,19 @@
+export interface Room {
+  id: string;
+  title: string;
+  haveHumidity: boolean;
+  roofHumidity: boolean;
+  wallHumidity: boolean;
+  floorHumidity: boolean;
+  haveWindow: boolean;
+  fromLight: string;
+  toLight: string;
+  puffyOnRain: boolean;
+  hearNeighbour: boolean;
+}
+
 export interface RoomState {
-  rooms: string[];
+  rooms: Room[];
 }
 
 export const ADD_ROOM = 'ADD_ROOM';
@@ -8,7 +22,7 @@ export const EDIT_ROOM = 'EDIT_ROOM';
 
 interface AddRoomAction {
   type: typeof ADD_ROOM;
-  payload: string;
+  payload: Room;
 }
 
 interface DeleteRoomAction {

@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../../../../store/root-reducer';
-import DescribableRoom from '../RoomList/RoomList';
+import RoomList from '../RoomList/RoomList';
 import './HardDataSlide.module.scss';
 
 const HardDataSlide: React.FC<{
@@ -28,7 +28,7 @@ const HardDataSlide: React.FC<{
   const [isLuminoso, setIsLuminoso] = useState<boolean>(false);
   const { t } = useTranslation();
   const rooms = useSelector((state: RootState) => state.opinion.rooms);
-
+  console.log('HardDataSlide - PINTANDO');
   return (
     <IonSlide>
       <IonGrid>
@@ -100,7 +100,7 @@ const HardDataSlide: React.FC<{
 
         <IonRow>
           <IonCol>
-            <DescribableRoom
+            <RoomList
               slidesRef={slidesRef}
               icon={home}
               title='Habitaciones'
