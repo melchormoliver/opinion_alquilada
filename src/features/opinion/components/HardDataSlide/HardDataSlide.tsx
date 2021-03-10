@@ -28,7 +28,6 @@ const HardDataSlide: React.FC<{
   const [isLuminoso, setIsLuminoso] = useState<boolean>(false);
   const { t } = useTranslation();
   const rooms = useSelector((state: RootState) => state.opinion.rooms);
-  console.log('HardDataSlide - PINTANDO');
   return (
     <IonSlide>
       <IonGrid>

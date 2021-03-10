@@ -36,7 +36,7 @@ const FeedPage: React.FC = () => {
           />
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
         {FeedService.getFeed().map((elem, index) => (
           <Card
             key={index}

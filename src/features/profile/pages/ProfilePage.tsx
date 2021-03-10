@@ -19,7 +19,7 @@ const ProfilePage: React.FC = () => {
           <IonTitle>Perfil</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
         <IonList>
           <IonListHeader lines='inset'>
             <IonLabel>Trending</IonLabel>

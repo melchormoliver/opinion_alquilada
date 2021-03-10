@@ -60,7 +60,7 @@ const OpinionPage: React.FC = () => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
         <IonSlides
           className={styles.root}
           pager

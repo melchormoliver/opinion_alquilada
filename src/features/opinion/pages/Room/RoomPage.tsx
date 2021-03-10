@@ -20,8 +20,8 @@ import {
   IonToggle,
   IonToolbar,
 } from '@ionic/react';
-import { closeOutline, saveOutline, settingsOutline } from 'ionicons/icons';
-import React, { useRef, useState } from 'react';
+import { closeOutline, saveOutline } from 'ionicons/icons';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -54,6 +54,11 @@ const RoomPage: React.FC = () => {
   const history = useHistory();
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    console.log('useEffect', idRoom);
+  }, []);
+
   const onSubmit = () => {
     const exists = rooms.findIndex((room: Room) => room.id === idRoom);
     if (exists >= 0) {
@@ -108,7 +113,7 @@ const RoomPage: React.FC = () => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
         <IonGrid>
           <IonRow>
             <IonCol>

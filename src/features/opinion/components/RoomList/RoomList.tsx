@@ -54,7 +54,6 @@ const RoomList: React.FC<RoomListProps> = ({
       history.push(`/opinion/room/${key}`);
     }
   };
-  console.log('RoomList - PINTANDO', items);
   return (
     <IonCard>
       <IonItem>

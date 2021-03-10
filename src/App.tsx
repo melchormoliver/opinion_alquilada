@@ -18,7 +18,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
@@ -36,11 +36,13 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route path={notFoundRoutes} exact component={NotFoundPage} />
-          <Route path={routeOpinion} exact component={OpinionPage} />
-          <Route path={'/opinion/room/:idRoom'} exact component={RoomPage} />
-          <Route path={routeTabs} component={TabsManager} />
-          <Redirect to={routeFeed} />
+          <Switch>
+            <Route path={notFoundRoutes} exact component={NotFoundPage} />
+            <Route path={routeOpinion} exact component={OpinionPage} />
+            <Route path={'/opinion/room/:idRoom'} exact component={RoomPage} />
+            <Route path={routeTabs} component={TabsManager} />
+            <Redirect to={routeFeed} />
+          </Switch>
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

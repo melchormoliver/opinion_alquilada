@@ -24,7 +24,7 @@ const NotFoundPage: React.FC = () => {
           <IonTitle>{t('notfound.title')}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
         <IonGrid className='ion-center'>
           <IonRow>
             <IonLabel>{t('notfound.content')}</IonLabel>
