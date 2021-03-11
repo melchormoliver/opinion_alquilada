@@ -59,7 +59,14 @@ const RoomList: React.FC<RoomListProps> = ({
       <IonItem>
         <IonIcon icon={icon} slot='start' />
         <IonLabel>{title}</IonLabel>
-        <IonButton fill='solid' slot='end' onClick={() => addOrEditItem()}>
+        <IonButton
+          fill='solid'
+          slot='end'
+          onClick={(e) => {
+            e.preventDefault();
+            addOrEditItem();
+          }}
+        >
           <IonIcon icon={addOutline} />
         </IonButton>
       </IonItem>
@@ -78,7 +85,10 @@ const RoomList: React.FC<RoomListProps> = ({
             >
               <IonItemOptions side='start'>
                 <IonItemOption
-                  onClick={() => deleteItem(item.id)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    deleteItem(item.id);
+                  }}
                   color='danger'
                 >
                   <IonIcon slot='icon-only' icon={trash} />
@@ -86,21 +96,28 @@ const RoomList: React.FC<RoomListProps> = ({
               </IonItemOptions>
               <IonItem
                 key={v4()}
-                onClick={() => {
-                  history.push(`/opinion/room/${item}`);
+                onClick={(e) => {
+                  e.preventDefault();
+                  addOrEditItem(item.id);
                 }}
               >
                 <IonLabel>{item.title}</IonLabel>
                 <IonIcon
                   icon={pencil}
                   slot='end'
-                  onClick={() => addOrEditItem(item.id)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addOrEditItem(item.id);
+                  }}
                 />
                 <IonReorder slot='end'></IonReorder>
               </IonItem>
               <IonItemOptions side='end'>
                 <IonItemOption
-                  onClick={() => deleteItem(item.id)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    deleteItem(item.id);
+                  }}
                   color='danger'
                 >
                   <IonIcon slot='icon-only' icon={trash} />

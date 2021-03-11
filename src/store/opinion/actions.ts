@@ -20,7 +20,7 @@ export const deleteRoom = (roomId: string): RoomActionTypes => {
   };
 };
 
-export const editRoom = (roomId: string): RoomActionTypes => {
+export const editRoom = (roomId: Room): RoomActionTypes => {
   return {
     type: EDIT_ROOM,
     payload: roomId,

@@ -24,71 +24,79 @@ import { closeOutline, saveOutline } from 'ionicons/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import { addRoom } from '../../../../store/opinion/actions';
+import { RouteComponentProps } from 'react-router-dom';
+import { addRoom, editRoom } from '../../../../store/opinion/actions';
 import { Room } from '../../../../store/opinion/types';
 import { RootState } from '../../../../store/root-reducer';
 import styles from './RoomPage.module.scss';
+import routesOpinion from '../../router/routes';
+interface Params
+  extends RouteComponentProps<{
+    idRoom: string;
+  }> {}
 
-interface Params {
-  idRoom: string;
-}
-
-const RoomPage: React.FC = () => {
-  const { idRoom } = useParams<Params>();
-  const [isHumid, setIsHumid] = useState(false);
-  const [haveWindow, setHaveWindow] = useState(false);
-  const [puffyWindowOnRain, setPuffyWindowOnRain] = useState(false);
-  const [fromLight, setFromLight] = useState('09:00');
-  const [toLight, setToLight] = useState('10:00');
-  const [roofHumidity, setRoofHumidity] = useState(false);
-  const [wallHumidity, setWallHumidity] = useState(false);
-  const [floorHumidity, setFloorHumidity] = useState(false);
-  const [listenNeighbors, setListenNeighbors] = useState(false);
-  const [extraOpinion, setExtraOpinion] = useState('');
-  const [title, setTitle] = useState('');
-
+const RoomPage: React.FC<Params> = ({ match, history }) => {
+  const initRoom: Room = {
+    haveHumidity: false,
+    haveWindow: false,
+    puffyOnRain: false,
+    fromLight: '',
+    toLight: '',
+    roofHumidity: false,
+    wallHumidity: false,
+    floorHumidity: false,
+    hearNeighbour: false,
+    extraOpinion: '',
+    title: '',
+    id: match.params.idRoom,
+  };
+  const [room, setRoom] = useState<Room>(initRoom);
   const submitRef = useRef<HTMLIonButtonElement>(null);
   const rooms = useSelector((state: RootState) => state.opinion.rooms);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const { t } = useTranslation();
 
-  useEffect(() => {
-    console.log('useEffect', idRoom);
-  }, []);
-
   const onSubmit = () => {
-    const exists = rooms.findIndex((room: Room) => room.id === idRoom);
+    debugger;
+    const exists = rooms.findIndex((myRoom: Room) => myRoom.id === room.id);
+    const toAdd: Room = {
+      ...room,
+      id: room.id,
+      title: room.title,
+      roofHumidity: room.haveHumidity && room.roofHumidity,
+      wallHumidity: room.haveHumidity && room.wallHumidity,
+      floorHumidity: room.haveHumidity && room.floorHumidity,
+      fromLight: room.haveWindow ? room.fromLight : '',
+      toLight: room.haveWindow ? room.toLight : '',
+      puffyOnRain: room.haveWindow && room.puffyOnRain,
+    };
     if (exists >= 0) {
       // edicion
+      dispatch(editRoom(toAdd));
     } else {
       // nuevo
-      const toAdd: Room = {
-        id: idRoom,
-        title: '',
-        haveHumidity: false,
-        roofHumidity: false,
-        wallHumidity: false,
-        floorHumidity: false,
-        haveWindow: false,
-        fromLight: '',
-        toLight: '',
-        puffyOnRain: false,
-        hearNeighbour: false,
-      };
       dispatch(addRoom(toAdd));
-      history.goBack();
     }
+    history.push(routesOpinion);
   };
+
+  useEffect(() => {
+    console.log('useEffect independiente', room.id);
+    const editRoom = rooms.find((savedRoom) => savedRoom.id === room.id)!;
+    if (editRoom) {
+      // edicion
+      setRoom({ ...editRoom });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot='start'>
-            <IonBackButton defaultHref='/tabs/feed' />
+            <IonBackButton defaultHref='/opinion' type='button' />
             <IonTitle> {t('roompage.title')} </IonTitle>
           </IonButtons>
           <IonButtons slot='end'>
@@ -123,11 +131,13 @@ const RoomPage: React.FC = () => {
                 </IonLabel>
                 <IonInput
                   placeholder='Pieza, Living...'
-                  value={title}
+                  value={room.title}
                   name='roomname'
                   id='id-roomname'
                   type='text'
-                  onIonChange={(e) => setTitle(e.detail.value!)}
+                  onIonChange={(e) =>
+                    setRoom({ ...room, title: e.detail.value! })
+                  }
                 />
               </IonItem>
             </IonCol>
@@ -138,16 +148,18 @@ const RoomPage: React.FC = () => {
                 <IonLabel>{t('roompage.havehumidity.toggle')}</IonLabel>
                 <IonToggle
                   slot='end'
-                  checked={isHumid}
+                  checked={room.haveHumidity}
                   id='id-haveHumidity'
                   name='haveHumidity'
-                  value={String(isHumid)}
-                  onIonChange={(e) => setIsHumid(e.detail.checked)}
+                  value={String(room.haveHumidity)}
+                  onIonChange={(e) =>
+                    setRoom({ ...room, haveHumidity: e.detail.checked })
+                  }
                 />
               </IonItem>
             </IonCol>
           </IonRow>
-          {isHumid && (
+          {room.haveHumidity && (
             <IonRow>
               <IonCol className='ion-text-center'>
                 <IonList>
@@ -156,33 +168,42 @@ const RoomPage: React.FC = () => {
                     <IonLabel>{t('roompage.havehumidity.roof.item')}</IonLabel>
                     <IonToggle
                       slot='start'
-                      checked={roofHumidity}
+                      checked={room.roofHumidity}
                       id='id-roofHumidity'
                       name='roofHumidity'
-                      value={String(roofHumidity)}
-                      onIonChange={(e) => setRoofHumidity(e.detail.checked)}
+                      value={String(room.roofHumidity)}
+                      onIonChange={(e) =>
+                        setRoom({
+                          ...room,
+                          roofHumidity: e.detail.checked,
+                        })
+                      }
                     />
                   </IonItem>
                   <IonItem>
                     <IonLabel>{t('roompage.havehumidity.wall.item')}</IonLabel>
                     <IonToggle
                       slot='start'
-                      checked={wallHumidity}
+                      checked={room.wallHumidity}
                       id='id-wallHumidity'
                       name='wallHumidity'
-                      value={String(wallHumidity)}
-                      onIonChange={(e) => setWallHumidity(e.detail.checked)}
+                      value={String(room.wallHumidity)}
+                      onIonChange={(e) =>
+                        setRoom({ ...room, wallHumidity: e.detail.checked })
+                      }
                     />
                   </IonItem>
                   <IonItem>
                     <IonLabel>{t('roompage.havehumidity.floor.item')}</IonLabel>
                     <IonToggle
                       slot='start'
-                      checked={floorHumidity}
+                      checked={room.floorHumidity}
                       id='id-floorHumidity'
                       name='floorHumidity'
-                      value={String(floorHumidity)}
-                      onIonChange={(e) => setFloorHumidity(e.detail.checked)}
+                      value={String(room.floorHumidity)}
+                      onIonChange={(e) =>
+                        setRoom({ ...room, wallHumidity: e.detail.checked })
+                      }
                     />
                   </IonItem>
                 </IonList>
@@ -197,13 +218,15 @@ const RoomPage: React.FC = () => {
                   slot='end'
                   id='id-haveWindow'
                   name='haveWindow'
-                  checked={haveWindow}
-                  onIonChange={(e) => setHaveWindow(e.detail.checked)}
+                  checked={room.haveWindow}
+                  onIonChange={(e) =>
+                    setRoom({ ...room, haveWindow: e.detail.checked })
+                  }
                 />
               </IonItem>
             </IonCol>
           </IonRow>
-          {haveWindow && (
+          {room.haveWindow && (
             <>
               <IonRow>
                 <IonCol className='ion-text-center'>
@@ -217,11 +240,14 @@ const RoomPage: React.FC = () => {
                       {t('roompage.havewindow.from.datetime')}
                     </IonLabel>
                     <IonDatetime
+                      placeholder='09:00'
                       displayFormat='HH:mm'
                       id='id-fromLight'
                       name='fromLight'
-                      value={fromLight}
-                      onIonChange={(e) => setFromLight(e.detail.value!)}
+                      value={room.fromLight}
+                      onIonChange={(e) =>
+                        setRoom({ ...room, fromLight: e.detail.value! })
+                      }
                     />
                   </IonItem>
                 </IonCol>
@@ -231,11 +257,14 @@ const RoomPage: React.FC = () => {
                       {t('roompage.havewindow.to.datetime')}
                     </IonLabel>
                     <IonDatetime
+                      placeholder='10:00'
                       name='toLight'
                       id='id-toLight'
                       displayFormat='HH:mm'
-                      value={toLight}
-                      onIonChange={(e) => setToLight(e.detail.value!)}
+                      value={room.toLight}
+                      onIonChange={(e) =>
+                        setRoom({ ...room, toLight: e.detail.value! })
+                      }
                     />
                   </IonItem>
                 </IonCol>
@@ -249,9 +278,9 @@ const RoomPage: React.FC = () => {
                     <IonToggle
                       id='id-puffyWindow'
                       name='puffyWindowOnRain'
-                      checked={puffyWindowOnRain}
+                      checked={room.puffyOnRain}
                       onIonChange={(e) =>
-                        setPuffyWindowOnRain(e.detail.checked)
+                        setRoom({ ...room, puffyOnRain: e.detail.checked })
                       }
                     />
                   </IonItem>
@@ -265,11 +294,13 @@ const RoomPage: React.FC = () => {
                 <IonLabel>{t('roompage.listenNeighbors.toogle')}</IonLabel>
                 <IonToggle
                   slot='end'
-                  checked={listenNeighbors}
+                  checked={room.hearNeighbour}
                   name='listenNeighbors'
                   id='id-listenNeighbors'
-                  value={String(listenNeighbors)}
-                  onIonChange={(e) => setListenNeighbors(e.detail.checked)}
+                  value={String(room.hearNeighbour)}
+                  onIonChange={(e) =>
+                    setRoom({ ...room, hearNeighbour: e.detail.checked })
+                  }
                 />
               </IonItem>
             </IonCol>
@@ -285,11 +316,13 @@ const RoomPage: React.FC = () => {
                 id='id-extraOpinion'
                 name='extraOpinion'
                 inputMode='text'
-                value={extraOpinion}
+                value={room.extraOpinion}
                 className={styles.extraOpinion}
                 maxlength={500}
                 placeholder={t('roompage.extraopinion.placeholder.textarea.1')}
-                onIonChange={(e) => setExtraOpinion(e.detail.value!)}
+                onIonChange={(e) =>
+                  setRoom({ ...room, extraOpinion: e.detail.value! })
+                }
               ></IonTextarea>
             </IonCol>
           </IonRow>

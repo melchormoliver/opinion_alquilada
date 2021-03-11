@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import App from './App';
 import { rootReducer } from './store/root-reducer';
@@ -22,11 +24,14 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const store = createStore(rootReducer);
+const history = createBrowserHistory();
 
 ReactDOM.render(
   <Suspense fallback={<div>Loading... </div>}>
     <Provider store={store}>
-      <App />
+      <Router history={history}>
+        <App />
+      </Router>
     </Provider>
   </Suspense>,
   document.getElementById('root')

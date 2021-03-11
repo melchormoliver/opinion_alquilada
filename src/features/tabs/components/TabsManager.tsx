@@ -8,7 +8,7 @@ import {
   IonIcon,
 } from '@ionic/react';
 import { useTranslation } from 'react-i18next';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { addCircleOutline, homeOutline, personOutline } from 'ionicons/icons';
 
 import FeedPage from '../../feed/pages/FeedPage';
@@ -16,14 +16,17 @@ import ProfilePage from '../../profile/pages/ProfilePage';
 import routeFeed from '../../feed/router/routes';
 import routeProfile from '../../profile/router/routes';
 import routeOpinion from '../../opinion/router/routes';
+import routeTabs from '../../tabs/router/routes';
 
 const TabsManager: React.FC = () => {
   const { t } = useTranslation();
   return (
     <IonTabs>
-      <IonRouterOutlet>
-        <Route path={routeFeed} exact component={FeedPage} />
-        <Route path={routeProfile} exact component={ProfilePage} />
+      <IonRouterOutlet basePath={routeTabs}>
+        <Switch>
+          <Route path={routeFeed} exact component={FeedPage} />
+          <Route path={routeProfile} exact component={ProfilePage} />
+        </Switch>
       </IonRouterOutlet>
       <IonTabBar slot='bottom'>
         <IonTabButton tab='feed' href={routeFeed}>

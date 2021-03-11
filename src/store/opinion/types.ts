@@ -10,6 +10,7 @@ export interface Room {
   toLight: string;
   puffyOnRain: boolean;
   hearNeighbour: boolean;
+  extraOpinion: string;
 }
 
 export interface RoomState {
@@ -32,7 +33,7 @@ interface DeleteRoomAction {
 
 interface EditRoomAction {
   type: typeof EDIT_ROOM;
-  payload: string;
+  payload: Room;
 }
 
 export type RoomActionTypes = AddRoomAction | DeleteRoomAction | EditRoomAction;
