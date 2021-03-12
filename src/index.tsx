@@ -11,6 +11,7 @@ import { createBrowserHistory } from 'history';
 
 import App from './App';
 import { rootReducer } from './store/root-reducer';
+import ErrorBoundary from './shared/hooks/ErrorBoundary';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDTBOqaVUWAXvBlMxGEGC85QqZe3-2z21A',
@@ -30,7 +31,9 @@ ReactDOM.render(
   <Suspense fallback={<div>Loading... </div>}>
     <Provider store={store}>
       <Router history={history}>
-        <App />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </Router>
     </Provider>
   </Suspense>,

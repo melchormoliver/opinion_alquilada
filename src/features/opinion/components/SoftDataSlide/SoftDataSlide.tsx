@@ -13,7 +13,7 @@ import {
 } from '@ionic/react';
 import React, { useState } from 'react';
 import SelectableChips from '../SelectableChips/SelectableChips';
-import OpinionService from '../../services/OpinionService';
+import OpinionService from '../../services/opinion/OpinionServiceImpl';
 
 const SoftDataSlide: React.FC = () => {
   const [selected, setSelected] = useState<string>('');

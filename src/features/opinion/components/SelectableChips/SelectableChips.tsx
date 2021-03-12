@@ -1,6 +1,6 @@
 import { IonChip, IonIcon, IonLabel } from '@ionic/react';
 import React, { useState } from 'react';
-import VecinoChip from '../../types/VecinoChip';
+import VecinoChip from '../../services/opinion/types/VecinoChip';
 
 interface SelectableChipProps {
   chips: VecinoChip[];

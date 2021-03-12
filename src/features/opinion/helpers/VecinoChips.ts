@@ -1,4 +1,4 @@
-import VecinoChip from '../types/VecinoChip';
+import VecinoChip from '../services/opinion/types/VecinoChip';
 import { pin } from 'ionicons/icons';
 
 const chipsVecinos: VecinoChip[] = [
